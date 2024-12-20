@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(to bottom, #002f4b, #dc4225);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 10px 0 20px;
+        }
+
+        .snowflake {
+            color: #fff;
+            font-size: 2rem;
+            animation: fall 10s linear infinite;
+            position: absolute;
+            top: -5%;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        .button {
+            background: #ff5c5c;
+            padding: 15px 30px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #ff3636;
+        }
+    </style>
+</head>
+<body>
+    <h1>Merry Christmas! 🎄</h1>
+    <p>Wishing you joy, love, and peace this holiday season!</p>
+    <a href="#" class="button">Share the Joy</a>
+
+    <!-- Snowflakes -->
+    <div class="snowflake" style="left: 10%;">❄</div>
+    <div class="snowflake" style="left: 20%; animation-delay: 2s;">❄</div>
+    <div class="snowflake" style="left: 30%; animation-delay: 4s;">❄</div>
+    <div class="snowflake" style="left: 40%; animation-delay: 1s;">❄</div>
+    <div class="snowflake" style="left: 50%; animation-delay: 3s;">❄</div>
+    <div class="snowflake" style="left: 60%; animation-delay: 5s;">❄</div>
+    <div class="snowflake" style="left: 70%; animation-delay: 6s;">❄</div>
+    <div class="snowflake" style="left: 80%; animation-delay: 2.5s;">❄</div>
+</body>
+</html>
