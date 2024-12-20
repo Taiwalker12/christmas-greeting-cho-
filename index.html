@@ -1,70 +1,17 @@
 import time
-import random
-import sys
 
-# Hàm tạo hiệu ứng tuyết rơi
-def tuyet_rơi():
-    snowflakes = ['❄️', '🌨️', '❄️', '⛄', '🌨️']
-    width = 50  # Độ rộng của dòng in ra
-    while True:
-        # In một dòng tuyết rơi ngẫu nhiên
-        snow = ''.join(random.choice(snowflakes) for _ in range(width))
-        print(snow, end='\r')  # In tuyết và quay lại vị trí đầu dòng
-        time.sleep(0.1)  # Chờ một chút để tạo hiệu ứng rơi tuyết
-        sys.stdout.flush()
-
-# Hàm chính chúc Giáng Sinh với hiệu ứng tuyết
 def chuc_giang_sinh():
-    # In cảnh Giáng Sinh ban đầu
-    print("🎄🎅 Chúc Mừng Giáng Sinh, Trang yêu! 🎅🎄")
-    time.sleep(1)
-    
-    # Gọi hàm tuyết rơi (hiệu ứng tuyết)
-    print("\n⛄❄️ Tuyết rơi nhẹ nhàng trên phố, ánh đèn lung linh soi sáng mọi nẻo đường...")
-    print("\n🌟🌟🌟 Cùng hòa mình vào không gian Giáng Sinh tuyệt vời này! 🌟🌟🌟")
-    print("\n✨🌟 Cùng ngắm những ngôi sao lung linh và ngọn đèn Giáng Sinh xung quanh ta 🌟✨")
-    time.sleep(2)
-    
-    # Lời chúc Giáng Sinh
     message = """
+    🎄🌟 MERRY CHRISTMAS 🌟🎄
+
     Chúc em, Trang yêu, một mùa Giáng Sinh an lành, ngập tràn niềm vui,
     hạnh phúc và thật nhiều yêu thương. Anh luôn mong em mãi tươi cười,
     mạnh khỏe và hạnh phúc trong mọi bước đi của cuộc sống.
-    
-    Anh yêu em rất nhiều! ❤️🎁🎄
+
+    Anh yêu em rất nhiều. ❤️🎁🎅
     """
-    print(message)
-    time.sleep(3)
+    for i in range(3):
+        print("\n" + message)
+        time.sleep(1)
 
-    # Dừng hiệu ứng tuyết
-    print("\n🎅 Tuyết rơi khắp nơi, khắp nơi đều ngập tràn yêu thương...")
-    time.sleep(2)
-
-    # Tạo sự tương tác lãng mạn
-    response = input("\nTrang yêu, em cảm thấy thế nào về mùa Giáng Sinh này? 😊: ")
-    print("\nAnh rất vui khi nghe em nói như vậy! Chúc em luôn vui vẻ và hạnh phúc! 🎅❤️")
-    
-    # Câu hỏi lãng mạn với hai lựa chọn
-    while True:
-        love_question = input("\nYêu chồng Tài không? (Có/Không): ").strip().lower()
-        if love_question == "có":
-            print("Anh cũng yêu em rất nhiều! 💖")
-            break
-        elif love_question == "không":
-            print("Anh sẽ làm cho em yêu anh nhiều hơn nữa! 💞")
-            break
-        else:
-            print("Hãy trả lời 'Có' hoặc 'Không' nhé!")
-
-    # Phản hồi theo cảm xúc
-    if "yêu" in response.lower():
-        print("Anh cũng yêu em rất nhiều! 💖")
-    elif "vui" in response.lower():
-        print("Anh hy vọng em sẽ luôn vui vẻ như vậy! 🌟")
-    else:
-        print("Mong em có một mùa Giáng Sinh thật đặc biệt nhé! 🎁")
-
-# Chạy chương trình
-if __name__ == "__main__":
-    tuyet_rơi()
-    chuc_giang_sinh()
+chuc_giang_sinh()
