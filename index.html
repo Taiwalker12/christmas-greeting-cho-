@@ -1,126 +1,70 @@
-import pygame
+import time
 import random
 import sys
-import time
 
-# Khởi tạo pygame
-pygame.init()
+# Hàm tạo hiệu ứng tuyết rơi
+def tuyet_rơi():
+    snowflakes = ['❄️', '🌨️', '❄️', '⛄', '🌨️']
+    width = 50  # Độ rộng của dòng in ra
+    while True:
+        # In một dòng tuyết rơi ngẫu nhiên
+        snow = ''.join(random.choice(snowflakes) for _ in range(width))
+        print(snow, end='\r')  # In tuyết và quay lại vị trí đầu dòng
+        time.sleep(0.1)  # Chờ một chút để tạo hiệu ứng rơi tuyết
+        sys.stdout.flush()
 
-# Kích thước của cửa sổ
-width, height = 600, 400
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Chúc Mừng Giáng Sinh!")
+# Hàm chính chúc Giáng Sinh với hiệu ứng tuyết
+def chuc_giang_sinh():
+    # In cảnh Giáng Sinh ban đầu
+    print("🎄🎅 Chúc Mừng Giáng Sinh, Trang yêu! 🎅🎄")
+    time.sleep(1)
+    
+    # Gọi hàm tuyết rơi (hiệu ứng tuyết)
+    print("\n⛄❄️ Tuyết rơi nhẹ nhàng trên phố, ánh đèn lung linh soi sáng mọi nẻo đường...")
+    print("\n🌟🌟🌟 Cùng hòa mình vào không gian Giáng Sinh tuyệt vời này! 🌟🌟🌟")
+    print("\n✨🌟 Cùng ngắm những ngôi sao lung linh và ngọn đèn Giáng Sinh xung quanh ta 🌟✨")
+    time.sleep(2)
+    
+    # Lời chúc Giáng Sinh
+    message = """
+    Chúc em, Trang yêu, một mùa Giáng Sinh an lành, ngập tràn niềm vui,
+    hạnh phúc và thật nhiều yêu thương. Anh luôn mong em mãi tươi cười,
+    mạnh khỏe và hạnh phúc trong mọi bước đi của cuộc sống.
+    
+    Anh yêu em rất nhiều! ❤️🎁🎄
+    """
+    print(message)
+    time.sleep(3)
 
-# Màu sắc
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-SNOW_COLOR = (255, 255, 255)
+    # Dừng hiệu ứng tuyết
+    print("\n🎅 Tuyết rơi khắp nơi, khắp nơi đều ngập tràn yêu thương...")
+    time.sleep(2)
 
-# Font chữ
-font = pygame.font.Font(None, 74)
-
-# Các vị trí của văn bản
-text_yeu = font.render("Yêu chồng Tài không?", True, BLACK)
-text_co = font.render("Có", True, RED)
-text_khong = font.render("Không", True, RED)
-
-# Vị trí để vẽ các chữ
-yeu_rect = text_yeu.get_rect(center=(width // 2, height // 3))
-co_rect = text_co.get_rect(center=(width // 2 - 100, height // 2))
-khong_rect = text_khong.get_rect(center=(width // 2 + 100, height // 2))
-
-# Danh sách bông tuyết
-snowflakes = []
-
-# Lớp tuyết
-class Snowflake(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.Surface((10, 10))
-        self.image.fill(SNOW_COLOR)
-        self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, width)
-        self.rect.y = random.randint(-20, height)
-        self.speed = random.randint(1, 3)
-
-    def update(self):
-        self.rect.y += self.speed
-        if self.rect.y > height:
-            self.rect.y = random.randint(-20, -1)
-            self.rect.x = random.randint(0, width)
-
-# Hàm vẽ hình trái tim
-def draw_heart():
-    pygame.draw.polygon(screen, RED, [(width // 2, height // 3), 
-                                      (width // 2 + 40, height // 3 - 30),
-                                      (width // 2 + 80, height // 3),
-                                      (width // 2, height // 3 + 50),
-                                      (width // 2 - 80, height // 3),
-                                      (width // 2 - 40, height // 3 - 30)], 0)
-    pygame.draw.circle(screen, RED, (width // 2 - 40, height // 3 - 30), 40)
-    pygame.draw.circle(screen, RED, (width // 2 + 40, height // 3 - 30), 40)
-
-# Hàm chính để chạy chương trình
-def run_game():
-    running = True
-    selected = None  # Biến lưu trạng thái lựa chọn
-    clock = pygame.time.Clock()
-
-    # Tạo sprite group cho tuyết
-    snow_group = pygame.sprite.Group()
-    for _ in range(100):  # Tạo 100 bông tuyết
-        snowflake = Snowflake()
-        snow_group.add(snowflake)
-
-    while running:
-        screen.fill(WHITE)
-
-        # Cập nhật tuyết
-        snow_group.update()
-        snow_group.draw(screen)
-
-        # Kiểm tra sự kiện di chuyển chuột
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-
-        # Nếu chuột vào khu vực của "Không", đổi thành "Có"
-        if khong_rect.collidepoint(mouse_x, mouse_y):
-            text_khong = font.render("Có", True, RED)
+    # Tạo sự tương tác lãng mạn
+    response = input("\nTrang yêu, em cảm thấy thế nào về mùa Giáng Sinh này? 😊: ")
+    print("\nAnh rất vui khi nghe em nói như vậy! Chúc em luôn vui vẻ và hạnh phúc! 🎅❤️")
+    
+    # Câu hỏi lãng mạn với hai lựa chọn
+    while True:
+        love_question = input("\nYêu chồng Tài không? (Có/Không): ").strip().lower()
+        if love_question == "có":
+            print("Anh cũng yêu em rất nhiều! 💖")
+            break
+        elif love_question == "không":
+            print("Anh sẽ làm cho em yêu anh nhiều hơn nữa! 💞")
+            break
         else:
-            text_khong = font.render("Không", True, RED)
+            print("Hãy trả lời 'Có' hoặc 'Không' nhé!")
 
-        # Vẽ các chữ lên màn hình
-        screen.blit(text_yeu, yeu_rect)
-        screen.blit(text_co, co_rect)
-        screen.blit(text_khong, khong_rect)
-
-        # Kiểm tra sự kiện chọn "Có" hay "Không"
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if co_rect.collidepoint(mouse_x, mouse_y):
-                    selected = "Có"
-                    screen.fill(RED)  # Nền đỏ khi chọn "Có"
-                    draw_heart()  # Vẽ trái tim
-                    pygame.display.flip()  # Cập nhật màn hình
-                    time.sleep(2)  # Hiển thị trái tim trong 2 giây
-                elif khong_rect.collidepoint(mouse_x, mouse_y):
-                    selected = "Không"
-                    screen.fill(WHITE)  # Quay lại màn hình trắng
-                    pygame.display.flip()  # Cập nhật màn hình
-
-        # Nếu đã chọn "Có", vẽ trái tim
-        if selected == "Có":
-            draw_heart()
-
-        pygame.display.flip()
-        clock.tick(60)  # Giới hạn FPS
-
-    pygame.quit()
-    sys.exit()
+    # Phản hồi theo cảm xúc
+    if "yêu" in response.lower():
+        print("Anh cũng yêu em rất nhiều! 💖")
+    elif "vui" in response.lower():
+        print("Anh hy vọng em sẽ luôn vui vẻ như vậy! 🌟")
+    else:
+        print("Mong em có một mùa Giáng Sinh thật đặc biệt nhé! 🎁")
 
 # Chạy chương trình
 if __name__ == "__main__":
-    run_game()
+    tuyet_rơi()
+    chuc_giang_sinh()
