@@ -16,7 +16,6 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 SNOW_COLOR = (255, 255, 255)
-TREE_GREEN = (34, 139, 34)  # Màu xanh của cây thông
 
 # Font chữ
 font = pygame.font.Font(None, 74)
@@ -51,32 +50,6 @@ class Snowflake(pygame.sprite.Sprite):
             self.rect.y = random.randint(-20, -1)
             self.rect.x = random.randint(0, width)
 
-# Hàm vẽ cây thông Noel
-def draw_tree():
-    # Vẽ thân cây
-    pygame.draw.rect(screen, (139, 69, 19), pygame.Rect(width // 2 - 15, height // 6 + 150, 30, 60))  # Thân cây
-    # Vẽ các tán lá của cây thông (hình tam giác)
-    pygame.draw.polygon(screen, TREE_GREEN, [(width // 2, height // 6),
-                                             (width // 2 - 60, height // 6 + 70),
-                                             (width // 2 + 60, height // 6 + 70)])
-    pygame.draw.polygon(screen, TREE_GREEN, [(width // 2, height // 6 - 40),
-                                             (width // 2 - 80, height // 6 + 30),
-                                             (width // 2 + 80, height // 6 + 30)])
-    pygame.draw.polygon(screen, TREE_GREEN, [(width // 2, height // 6 - 80),
-                                             (width // 2 - 100, height // 6 + 10),
-                                             (width // 2 + 100, height // 6 + 10)])
-
-    # Vẽ ngôi sao trên đỉnh cây
-    pygame.draw.polygon(screen, (255, 215, 0), [(width // 2, height // 6 - 110), 
-                                                (width // 2 - 10, height // 6 - 130),
-                                                (width // 2 + 10, height // 6 - 130)])
-
-    # Vẽ các quả thông trang trí (hình tròn nhỏ)
-    pygame.draw.circle(screen, (255, 0, 0), (width // 2 - 40, height // 6 + 20), 8)
-    pygame.draw.circle(screen, (255, 0, 0), (width // 2 + 40, height // 6 + 20), 8)
-    pygame.draw.circle(screen, (255, 255, 0), (width // 2 - 50, height // 6 + 50), 8)
-    pygame.draw.circle(screen, (255, 255, 0), (width // 2 + 50, height // 6 + 50), 8)
-
 # Hàm vẽ hình trái tim
 def draw_heart():
     pygame.draw.polygon(screen, RED, [(width // 2, height // 3), 
@@ -102,9 +75,6 @@ def run_game():
 
     while running:
         screen.fill(WHITE)
-
-        # Vẽ cây thông Noel
-        draw_tree()
 
         # Cập nhật tuyết
         snow_group.update()
