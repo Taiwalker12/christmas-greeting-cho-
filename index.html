@@ -1,17 +1,175 @@
-import time
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Giáng Sinh!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
 
-def chuc_giang_sinh():
-    message = """
-    🎄🌟 MERRY CHRISTMAS 🌟🎄
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-    Chúc em, Trang yêu, một mùa Giáng Sinh an lành, ngập tràn niềm vui,
-    hạnh phúc và thật nhiều yêu thương. Anh luôn mong em mãi tươi cười,
-    mạnh khỏe và hạnh phúc trong mọi bước đi của cuộc sống.
+        .message {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+            display: none;
+        }
 
-    Anh yêu em rất nhiều. ❤️🎁🎅
-    """
-    for i in range(3):
-        print("\n" + message)
-        time.sleep(1)
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
 
-chuc_giang_sinh()
+        .option {
+            padding: 20px 30px;
+            background-color: red;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .option:hover {
+            background-color: green;
+        }
+
+        .heart {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 150px; /* Đã làm trái tim lớn hơn */
+            color: red;
+        }
+
+        /* Tuyết */
+        .snowflake {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Cây thông Noel */
+        .tree {
+            position: absolute;
+            bottom: 80px;
+            left: 80%;  /* Dịch cây thông sang phải */
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 100px solid green;
+            transform: translateX(-50%);
+        }
+
+        .tree:before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -60px;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 80px solid green;
+        }
+
+        .tree:after {
+            content: '';
+            position: absolute;
+            top: -70px;
+            left: -60px;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 60px solid green;
+        }
+
+        .tree .star {
+            position: absolute;
+            top: -110px;
+            left: -10px;
+            font-size: 30px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Yêu chồng Tài không?</h1>
+
+    <div class="options">
+        <div class="option" id="co">Có</div>
+        <div class="option" id="khong">Không</div>
+    </div>
+
+    <div class="message" id="message">Chúc em Giáng Sinh vui vẻ hạnh phúc bên anh!</div>
+    <div class="heart" id="heart">❤️</div>
+
+    <!-- Cây thông Noel -->
+    <div class="tree" id="tree">
+        <div class="star">⭐</div>
+    </div>
+
+    <script>
+        // Tạo hiệu ứng tuyết
+        for (let i = 0; i < 100; i++) {
+            let snowflake = document.createElement("div");
+            snowflake.classList.add("snowflake");
+            snowflake.style.left = Math.random() * window.innerWidth + "px";
+            snowflake.style.animationDuration = Math.random() * 3 + 3 + "s";
+            snowflake.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(snowflake);
+        }
+
+        // Lắng nghe sự kiện chuột
+        document.getElementById("co").addEventListener("click", function () {
+            document.body.style.backgroundColor = "#ffcccc"; // Màu nền khi chọn "Có"
+            document.getElementById("heart").style.display = "block"; // Hiển thị trái tim
+            document.getElementById("message").style.display = "block"; // Hiển thị thông điệp
+        });
+
+        document.getElementById("khong").addEventListener("click", function () {
+            document.body.style.backgroundColor = "#f1f1f1"; // Quay lại nền mặc định
+            document.getElementById("heart").style.display = "none"; // Ẩn trái tim
+            document.getElementById("message").style.display = "none"; // Ẩn thông điệp
+        });
+    </script>
+
+</body>
+</html>
