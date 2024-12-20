@@ -1,81 +1,90 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chúc Mừng Giáng Sinh Trang</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-      background-color: #f0f8ff;
-    }
-    button {
-      background-color: #ff6347;
-      color: white;
-      padding: 15px 32px;
-      font-size: 18px;
-      cursor: pointer;
-      border-radius: 8px;
-      margin: 10px;
-    }
-    h1 {
-      color: #ff1493;
-      font-size: 24px;
-      display: none;
-    }
-    .message {
-      font-size: 20px;
-      color: #32cd32;
-    }
-    .yes-no {
-      font-size: 24px;
-      font-weight: bold;
-      color: #ff6347;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    .yes-no:hover {
-      color: #008080;
-    }
-    .tree {
-      margin-top: 30px;
-      width: 150px;
-      height: 150px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/9/94/Christmas_tree.png') no-repeat center;
-      background-size: contain;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
-</head>
-<body>
-  <h1 id="christmas-message">Trang yêu à, Merry Christmas! Chúc em một mùa Giáng Sinh ngọt ngào và đầy yêu thương!</h1>
-  <button onclick="showMessage()">Nhấn để nhận lời chúc Giáng Sinh cho Trang</button>
-  <p id="special-message" class="message"></p>
-  
-  <!-- Hình ảnh cây thông Noel -->
-  <div class="tree"></div>
+import pygame
+import sys
 
-  <p class="yes-no" id="question">Yêu chồng Tài không? <span id="yes-text">Có</span> / <span id="no-text">Không</span></p>
+# Khởi tạo pygame
+pygame.init()
 
-  <script>
-    function showMessage() {
-      document.getElementById('christmas-message').style.display = 'block';
-      document.getElementById('special-message').innerText = "Mùa Giáng Sinh này, anh chỉ muốn em luôn hạnh phúc và bên cạnh anh mãi mãi! Anh yêu Trang nhất!";
-    }
+# Kích thước của cửa sổ
+width, height = 600, 400
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Chúc Mừng Giáng Sinh!")
 
-    // Đổi chữ "Có" thành "Không" khi di chuột
-    document.getElementById('yes-text').addEventListener('mouseover', function() {
-      document.getElementById('yes-text').innerText = "Không";
-    });
-    
-    // Đổi lại chữ "Không" thành "Có" khi di chuột ra
-    document.getElementById('yes-text').addEventListener('mouseout', function() {
-      document.getElementById('yes-text').innerText = "Có";
-    });
-  </script>
-</body>
-</html>
+# Màu sắc
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+
+# Font chữ
+font = pygame.font.Font(None, 74)
+
+# Các vị trí của văn bản
+text_yeu = font.render("Yêu chồng Tài không?", True, BLACK)
+text_co = font.render("Có", True, RED)
+text_khong = font.render("Không", True, RED)
+
+# Vị trí để vẽ các chữ
+yeu_rect = text_yeu.get_rect(center=(width // 2, height // 3))
+co_rect = text_co.get_rect(center=(width // 2 - 100, height // 2))
+khong_rect = text_khong.get_rect(center=(width // 2 + 100, height // 2))
+
+# Hàm vẽ hình trái tim
+def draw_heart():
+    pygame.draw.polygon(screen, RED, [(width // 2, height // 3), 
+                                      (width // 2 + 40, height // 3 - 30),
+                                      (width // 2 + 80, height // 3),
+                                      (width // 2, height // 3 + 50),
+                                      (width // 2 - 80, height // 3),
+                                      (width // 2 - 40, height // 3 - 30)], 0)
+    pygame.draw.circle(screen, RED, (width // 2 - 40, height // 3 - 30), 40)
+    pygame.draw.circle(screen, RED, (width // 2 + 40, height // 3 - 30), 40)
+
+# Hàm chính để chạy chương trình
+def run_game():
+    running = True
+    selected = None  # Biến lưu trạng thái lựa chọn
+    while running:
+        screen.fill(WHITE)
+
+        # Kiểm tra sự kiện di chuyển chuột
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
+        # Nếu chuột vào khu vực của "Không", đổi thành "Có"
+        if khong_rect.collidepoint(mouse_x, mouse_y):
+            text_khong = font.render("Có", True, RED)
+        else:
+            text_khong = font.render("Không", True, RED)
+
+        # Vẽ các chữ lên màn hình
+        screen.blit(text_yeu, yeu_rect)
+        screen.blit(text_co, co_rect)
+        screen.blit(text_khong, khong_rect)
+
+        # Kiểm tra sự kiện chọn "Có" hay "Không"
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if co_rect.collidepoint(mouse_x, mouse_y):
+                    selected = "Có"
+                    screen.fill(RED)  # Nền đỏ khi chọn "Có"
+                    draw_heart()  # Vẽ trái tim
+                    pygame.display.flip()  # Cập nhật màn hình
+                    time.sleep(2)  # Hiển thị trái tim trong 2 giây
+                elif khong_rect.collidepoint(mouse_x, mouse_y):
+                    selected = "Không"
+                    screen.fill(WHITE)  # Quay lại màn hình trắng
+                    pygame.display.flip()  # Cập nhật màn hình
+
+        # Nếu đã chọn "Có", vẽ trái tim
+        if selected == "Có":
+            draw_heart()
+
+        pygame.display.flip()
+
+    pygame.quit()
+    sys.exit()
+
+# Chạy chương trình
+if __name__ == "__main__":
+    run_game()
